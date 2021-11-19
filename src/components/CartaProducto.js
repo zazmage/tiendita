@@ -59,17 +59,17 @@ const CartaProducto = ({
           <Card.Text>{precio}</Card.Text>
 
           <Link to={`/producto/${nombre}`}>
-            <Button variant="primary">Ver producto</Button>
+            <Button className="btn-card" variant="primary">Ver producto</Button>
           </Link>
           {location.pathname === "/" ? (
-            <Button onClick={handleEditar} variant="warning">
+            <Button className="btn-card" onClick={handleEditar} variant="warning">
               Editar
             </Button>
           ) : (
             <></>
           )}
 
-          <Button onClick={handleDelete} variant="danger">
+          <Button className="btn-card" onClick={handleDelete} variant="danger">
             Eliminar
           </Button>
         </Card.Body>

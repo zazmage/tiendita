@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../style/main.css"
+import "../style/main.css";
 import { Form, Col, Row, Button } from "react-bootstrap";
 
 const FormCrud = ({ form, setForm }) => {
@@ -107,8 +107,8 @@ const FormCrud = ({ form, setForm }) => {
 
   return (
     <div className="cont-formulario">
-      <h3>Agregar prooducto</h3>
-      <Form>
+      <Button className="mainmenubtn" variant="danger" type="button">Agregar producto</Button>
+      <Form className="form-cont">
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalText">
           <Form.Label column sm={2}>
             Nombre

@@ -15,7 +15,7 @@ function App() {
   });
 
   return (
-  <div>
+  <div className="main">
     <h1 className="title">Tiendita uwu</h1>  
     <div className="contportada">
       <img
@@ -42,5 +42,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
