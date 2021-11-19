@@ -4,7 +4,7 @@ import { useFetch } from "./hooks/useFetch";
 
 function App() {
   const { data } = useFetch("https://latiendita-app.herokuapp.com/productos");
-  console.log(data);
+
   return (
     <div>
       <img
