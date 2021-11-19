@@ -51,7 +51,7 @@ body{
 
 .img-fruta{
     width: 100px;
-    height: 190px;
+    height: 100px;
 }
 /* ----------------------------formulario------------------------------ */
 
@@ -68,7 +68,6 @@ body{
 }
 
 .btn-card{
-    font-size: 2em;
     width: 140px;
     margin-top: 2px;
 }
