@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import CartaProducto from "./components/CartaProducto";
+import FormCrud from "./components/FormCrud";
+import { useFetch } from "./hooks/useFetch";
 
 function App() {
+  const { data } = useFetch("https://latiendita-app.herokuapp.com/productos");
+  console.log(data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <img
+        src="https://res.cloudinary.com/gestionarchivos/image/upload/v1637331969/La%20tiendita/portada_pco03i.jpg"
+        alt="Poster"
+        style={{ width: "100px" }}
+      />
+      <FormCrud />
+      {data === null ? (
+        <h3>Cargando...</h3>
+      ) : (
+        data.map((el) => <CartaProducto key={el.id} props={el} />)
+      )}
     </div>
   );
 }
