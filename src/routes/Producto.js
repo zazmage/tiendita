@@ -15,8 +15,6 @@ const Producto = () => {
     }
   }, [data, params.nombreProducto]);
 
-  console.log(prodSelec);
-  console.log(params.nombreProducto);
   return (
     <div>
       <h2>Soy un producto</h2>
