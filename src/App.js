@@ -2,7 +2,7 @@ import CartaProducto from "./components/CartaProducto";
 import "./style/main.css";
 import FormCrud from "./components/FormCrud";
 import { useFetch } from "./hooks/useFetch";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function App() {
   const { data } = useFetch("https://latiendita-app.herokuapp.com/productos");

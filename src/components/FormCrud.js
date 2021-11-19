@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../style/main.css";
 import { Form, Col, Row, Button } from "react-bootstrap";
 
@@ -89,8 +89,7 @@ const FormCrud = ({ form, setForm }) => {
           }),
         };
         const res = await fetch(`${url}/${form.id}`, options);
-        const json = await res.json();
-
+        
         if (!res.ok)
           throw new Error("Algo sucedió", {
             err: true,
