@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
+import { Button } from "react-bootstrap";
+import CartaProducto from "../components/CartaProducto";
 
 const Producto = () => {
   const { data } = useFetch("https://latiendita-app.herokuapp.com/productos");
@@ -11,13 +13,16 @@ const Producto = () => {
     if (data !== null) {
       setProdSelec(data.filter((el) => el.nombre === params.nombreProducto)[0]);
     }
-  }, [data]);
+  }, [data, params.nombreProducto]);
 
   console.log(prodSelec);
   console.log(params.nombreProducto);
   return (
     <div>
       <h2>Soy un producto</h2>
+      <Link to="/">
+        <Button>Atras</Button>
+      </Link>
       {prodSelec === null ? (
         <h3>Cargando...</h3>
       ) : (
@@ -26,6 +31,15 @@ const Producto = () => {
           <div>
             <h3>{prodSelec.nombre}</h3>
             <p>{prodSelec.precio}</p>
+            <Button>Agregar</Button>
+          </div>
+          <div>
+            <h3>Productos relacionados</h3>
+            {data
+              .filter((el) => el.categoria === prodSelec.categoria)
+              .map((el) => (
+                <CartaProducto key={el.id} props={el} />
+              ))}
           </div>
         </div>
       )}
