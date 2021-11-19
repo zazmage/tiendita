@@ -1,12 +1,13 @@
 import React from "react";
+import "../style/main.css"
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const CartaProducto = ({ props: { nombre, precio, imgUrl } }) => {
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={imgUrl} />
+    <div >
+      <Card className="cont-card">
+        <Card.Img className="img-fruta" variant="top" src={imgUrl} />
         <Card.Body>
           <Card.Title>{nombre}</Card.Title>
           <Card.Text>{precio}</Card.Text>
