@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
 
-const FormCrud = () => {
-  const [form, setForm] = useState({});
+const FormCrud = ({ form, setForm }) => {
   const url = "https://latiendita-app.herokuapp.com/productos";
   /* useEffect(() => {
     const postData = async (url, posting) => {
@@ -40,27 +39,57 @@ const FormCrud = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (
-      form.nombre !== undefined &&
-      form.categoria !== undefined &&
-      form.precio !== undefined &&
-      form.imgUrl !== undefined
-    ) {
-      try {
-        const options = {
-            method: "POST",
-            headers: {
-              "content-type": "application/json; charset=utf-8",
+    if (form.id === "") {
+      if (
+        form.nombre !== undefined &&
+        form.categoria !== undefined &&
+        form.precio !== undefined &&
+        form.imgUrl !== undefined
+      ) {
+        try {
+          const options = {
+              method: "POST",
+              headers: {
+                "content-type": "application/json; charset=utf-8",
+              },
+              body: JSON.stringify({
+                nombre: form.nombre,
+                categoria: form.categoria,
+                precio: form.precio,
+                imgUrl: form.imgUrl,
+              }),
             },
-            body: JSON.stringify({
-              nombre: form.nombre,
-              categoria: form.categoria,
-              precio: form.precio,
-              imgUrl: form.imgUrl,
-            }),
+            res = await fetch(url, options);
+          if (!res.ok)
+            throw new Error("Algo sucedió", {
+              err: true,
+              status: res.status,
+              statusText: !res.statusText ? "Ocurrió un error" : res.statusText,
+            });
+          document.location.reload();
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        alert("faltan datos");
+      }
+    } else {
+      try {
+        let options = {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json; charset=utf-8",
           },
-          res = await fetch(url, options);
+          body: JSON.stringify({
+            nombre: form.nombre,
+            categoria: form.categoria,
+            precio: form.precio,
+            imgUrl: form.imgUrl,
+          }),
+        };
+        const res = await fetch(`${url}/${form.id}`, options);
+        const json = await res.json();
+
         if (!res.ok)
           throw new Error("Algo sucedió", {
             err: true,
@@ -69,10 +98,9 @@ const FormCrud = () => {
           });
         document.location.reload();
       } catch (err) {
-        console.log(err);
+        let message = err.statusText || "Ocurrió un error";
+        console.log(`Error ${err.status}: ${message}`);
       }
-    } else {
-      alert("faltan datos");
     }
   };
 
@@ -86,6 +114,7 @@ const FormCrud = () => {
           </Form.Label>
           <Col sm={4}>
             <Form.Control
+              value={form.nombre}
               onChange={handleChange}
               type="text"
               name="nombre"
@@ -100,6 +129,7 @@ const FormCrud = () => {
           </Form.Label>
           <Col sm={4}>
             <Form.Control
+              value={form.categoria}
               onChange={handleChange}
               type="Text"
               name="categoria"
@@ -114,6 +144,7 @@ const FormCrud = () => {
           </Form.Label>
           <Col sm={4}>
             <Form.Control
+              value={form.precio}
               onChange={handleChange}
               type="Text"
               name="precio"
@@ -128,6 +159,7 @@ const FormCrud = () => {
           </Form.Label>
           <Col sm={4}>
             <Form.Control
+              value={form.imgUrl}
               onChange={handleChange}
               type="Text"
               name="imgUrl"
@@ -135,6 +167,14 @@ const FormCrud = () => {
             />
           </Col>
         </Form.Group>
+
+        <Form.Control
+          value={form.id}
+          onChange={handleChange}
+          type="Text"
+          name="id"
+          hidden
+        />
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
