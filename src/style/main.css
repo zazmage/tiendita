@@ -1,14 +1,26 @@
 body{
-    padding: 20px;
-    margin: 0;
+    padding: 40px;
     background: #D9EAD3;
+}
+
+.title{
+    margin-left: 40px;
+    font-size: 2.5em;
+    color: red;
+
+}
+
+.contportada{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    padding: 40px;
 }
 
 .portada{
     width: 100%;
     height: 300px;
     border-radius: 30px;
-    justify-content: center;
 }
 
 .contproducto{
@@ -23,6 +35,13 @@ body{
 
 .contproducto::-webkit-scrollbar{
     width: 7px;
+    height: 10px;
+    
+}
+
+.contproducto::-webkit-scrollbar-thumb{
+    background: rgb(150, 150, 150);
+    border-radius: 10px;
 }
 
 .cont-card{
@@ -34,5 +53,12 @@ body{
 .img-fruta{
     width: 100px;
     height: 190px;
+}
+/* ----------------------------formulario------------------------------ */
+
+.cont-formulario{
+    display: flex;
+    flex-direction:column;
+    border-radius: 2px solid;
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../style/main.css"
 import { Form, Col, Row, Button } from "react-bootstrap";
 
 const FormCrud = () => {
@@ -77,8 +78,8 @@ const FormCrud = () => {
   };
 
   return (
-    <div>
-      <h3>Soy un formulario</h3>
+    <div className="cont-formulario">
+      <h3>Agregar prooducto</h3>
       <Form>
         <Form.Group as={Row} className="mb-3" controlId="formHorizontalText">
           <Form.Label column sm={2}>

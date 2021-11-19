@@ -8,13 +8,15 @@ function App() {
   const { data } = useFetch("https://latiendita-app.herokuapp.com/productos");
 
   return (
-    <div>
+  <div>
+    <h1 className="title">Tiendita uwu</h1>  
+    <div className="contportada">
       <img
         className="portada"
-        src="https://res.cloudinary.com/gestionarchivos/image/upload/v1637331969/La%20tiendita/portada_pco03i.jpg"
+        src="https://res.cloudinary.com/gestionarchivos/image/upload/v1637343094/La%20tiendita/Banner_ap7xdy.png"
         alt="Poster"
-        
       />
+     </div>  
       <FormCrud />
       <div className="contproducto">
       {data === null ? (
@@ -22,8 +24,8 @@ function App() {
       ) : (
         data.map((el) => <CartaProducto key={el.id} props={el}/>)
       )}
-      </div>
     </div>
+  </div>
   );
 }
 
