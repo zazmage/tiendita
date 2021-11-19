@@ -1,11 +1,57 @@
 import React from "react";
-import "../style/main.css"
+import "../style/main.css";
 import { Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const CartaProducto = ({ props: { nombre, precio, imgUrl } }) => {
+const CartaProducto = ({
+  props: { nombre, precio, imgUrl, categoria, id },
+  form,
+  setForm,
+}) => {
+  const handleEditar = () => {
+    setForm({
+      nombre,
+      categoria,
+      precio,
+      imgUrl,
+      id,
+    });
+  };
+
+  const url = "https://latiendita-app.herokuapp.com/productos";
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const desicion = window.confirm("Desea eliminar este producto?");
+    if (desicion) {
+      try {
+        let options = {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+          },
+        };
+        console.log(id);
+        const res = await fetch(`${url}/${id}`, options);
+
+        if (!res.ok)
+          throw new Error("Algo sucedió", {
+            err: true,
+            status: res.status,
+            statusText: !res.statusText ? "Ocurrió un error" : res.statusText,
+          });
+        document.location.reload();
+      } catch (err) {
+        let message = err.statusText || "Ocurrió un error";
+        console.log(`Error ${err.status}: ${message}`);
+      }
+    }
+  };
+
+  const location = useLocation();
+
   return (
-    <div >
+    <div>
       <Card className="cont-card">
         <Card.Img className="img-fruta" variant="top" src={imgUrl} />
         <Card.Body>
@@ -15,6 +61,17 @@ const CartaProducto = ({ props: { nombre, precio, imgUrl } }) => {
           <Link to={`/producto/${nombre}`}>
             <Button variant="primary">Ver producto</Button>
           </Link>
+          {location.pathname === "/" ? (
+            <Button onClick={handleEditar} variant="warning">
+              Editar
+            </Button>
+          ) : (
+            <></>
+          )}
+
+          <Button onClick={handleDelete} variant="danger">
+            Eliminar
+          </Button>
         </Card.Body>
       </Card>
     </div>

@@ -15,6 +15,16 @@ const Producto = () => {
     }
   }, [data, params.nombreProducto]);
 
+  const handleAgregar = () => {
+    if (localStorage.getItem("carrito")) {
+      const previousStorage = JSON.parse(localStorage.getItem("carrito"));
+      previousStorage.push(prodSelec);
+      localStorage.setItem("carrito", JSON.stringify(previousStorage));
+    } else {
+      localStorage.setItem("carrito", JSON.stringify([prodSelec]));
+    }
+  };
+
   return (
     <div>
       <h2>Soy un producto</h2>
@@ -29,7 +39,7 @@ const Producto = () => {
           <div>
             <h3>{prodSelec.nombre}</h3>
             <p>{prodSelec.precio}</p>
-            <Button>Agregar</Button>
+            <Button onClick={handleAgregar}>Agregar</Button>
           </div>
           <div>
             <h3>Productos relacionados</h3>
