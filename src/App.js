@@ -15,12 +15,15 @@ function App() {
   });
 
   return (
-    <div>
+  <div>
+    <h1 className="title">Tiendita uwu</h1>  
+    <div className="contportada">
       <img
         className="portada"
-        src="https://res.cloudinary.com/gestionarchivos/image/upload/v1637331969/La%20tiendita/portada_pco03i.jpg"
+        src="https://res.cloudinary.com/gestionarchivos/image/upload/v1637343094/La%20tiendita/Banner_ap7xdy.png"
         alt="Poster"
       />
+     </div>  
       <FormCrud form={form} setForm={setForm} />
       <div className="contproducto">
         {data === null ? (
@@ -37,6 +40,7 @@ function App() {
         )}
       </div>
     </div>
+  </div>
   );
 }
 
